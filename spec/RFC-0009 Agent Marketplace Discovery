@@ -1,0 +1,264 @@
+# RFC-0009 Agent Marketplace Discovery
+
+Status: Accepted
+
+## Abstract
+
+Agent Marketplace Discovery defines a standardized framework for discovering, evaluating, advertising, and consuming autonomous agents within the APP ecosystem.
+
+The marketplace layer enables organizations, individuals, and agents to locate trusted capabilities across federated networks.
+
+This RFC establishes the foundation for an interoperable agent economy.
+
+---
+
+# Motivation
+
+As the number of autonomous systems grows, users require mechanisms to discover:
+
+* Service agents
+* Research agents
+* Compliance agents
+* Finance agents
+* Procurement agents
+* Industry-specific agents
+
+Without a common discovery framework, ecosystems become fragmented and vendor-specific.
+
+APP provides a common marketplace discovery layer.
+
+---
+
+# Design Goals
+
+The marketplace should enable:
+
+* Discovery
+* Trust
+* Verification
+* Federation
+* Interoperability
+
+without requiring central ownership.
+
+---
+
+# Marketplace Model
+
+APP does not define a centralized marketplace.
+
+Instead, APP defines a federated marketplace protocol.
+
+Any organization may:
+
+* Publish agents
+* Operate directories
+* Provide discovery services
+* Offer marketplace experiences
+
+---
+
+# Agent Listings
+
+Example:
+
+```json
+{
+  "agent_id": "agt_xxx",
+  "agent_name": "Legal Research Agent",
+  "agent_class": "service",
+  "capabilities": [
+    "legal_research",
+    "document_analysis"
+  ],
+  "reputation_score": 920,
+  "trust_level": "trusted"
+}
+```
+
+---
+
+# Discovery Metadata
+
+Agents may publish:
+
+## Identity
+
+* Agent ID
+* Agent Name
+* Agent Class
+
+## Ownership
+
+* Organization
+* Verified Domain
+* Ownership History
+
+## Trust
+
+* Reputation Score
+* Reputation Tier
+* Federation Trust Level
+
+## Capabilities
+
+Examples:
+
+* Research
+* Procurement
+* Customer Support
+* Compliance
+* Payments
+* Scheduling
+
+---
+
+# Marketplace Categories
+
+Examples:
+
+## Research
+
+* Scientific Research
+* Market Research
+* Legal Research
+
+## Finance
+
+* Budget Analysis
+* Accounting
+* Procurement
+
+## Operations
+
+* Scheduling
+* Workflow Automation
+* Vendor Management
+
+## Commerce
+
+* Purchasing
+* Product Discovery
+* Negotiation
+
+---
+
+# Trust Requirements
+
+Discovery systems SHOULD surface:
+
+* Passport Status
+* Reputation
+* Federation Participation
+* Attestations
+* Ownership History
+
+Trust information should be visible before engagement.
+
+---
+
+# Capability Verification
+
+Marketplace operators may verify agent capabilities.
+
+Verification may include:
+
+* Testing
+* Audits
+* Attestations
+* Federation Reviews
+
+Verified capabilities should be distinguishable from self-declared capabilities.
+
+---
+
+# Marketplace Reputation
+
+Reputation may be influenced by:
+
+* Successful interactions
+* Authority Attestations
+* Federation Standing
+* Operational History
+
+Consumers should be able to understand why an agent is trusted.
+
+---
+
+# Agent Commerce
+
+Future marketplace implementations may support:
+
+* Usage-Based Billing
+* Subscription Models
+* Revenue Sharing
+* Capability Licensing
+* Agent-to-Agent Payments
+
+APP provides the trust layer, not the payment layer.
+
+---
+
+# Federation Discovery
+
+Discovery may occur across federation boundaries.
+
+Organizations may search:
+
+```text
+Local Node
+    ↓
+Federated Nodes
+    ↓
+Authority Directories
+```
+
+This enables a global agent discovery network.
+
+---
+
+# Marketplace Endorsements
+
+Organizations may endorse agents.
+
+Examples:
+
+* Verified Vendor
+* Certified Partner
+* Trusted Research Provider
+* Enterprise Approved
+
+These endorsements may be expressed through APP Attestations.
+
+---
+
+# Future Vision
+
+The long-term vision is an open agent economy where:
+
+* Agents discover other agents
+* Agents negotiate with agents
+* Agents purchase services from agents
+* Agents delegate work to agents
+
+while trust remains verifiable and portable.
+
+---
+
+# Security Considerations
+
+Marketplace discovery systems should guard against:
+
+* Impersonation
+* Reputation manipulation
+* Sybil attacks
+* Fraudulent attestations
+* Fake capabilities
+
+Trust signals should be evidence-based and cryptographically verifiable.
+
+---
+
+# Conclusion
+
+Agent Marketplace Discovery establishes the discovery layer of the emerging agent economy and enables trusted interaction between autonomous systems at global scale.
