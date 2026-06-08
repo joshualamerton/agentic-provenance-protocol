@@ -1,0 +1,270 @@
+# RFC-0008 Spend Authorization
+
+Status: Accepted
+
+## Abstract
+
+Spend Authorization defines a standardized framework for controlling, approving, monitoring, and auditing financial actions performed by autonomous agents.
+
+The framework enables organizations and individuals to grant limited spending authority to agents while maintaining accountability, auditability, and risk controls.
+
+APP does not move money.
+
+APP provides the trust, identity, authorization, and audit infrastructure required for agents to safely interact with payment systems, financial institutions, vendors, marketplaces, and procurement platforms.
+
+---
+
+# Motivation
+
+Autonomous systems are increasingly capable of:
+
+* Purchasing software
+* Paying invoices
+* Procuring services
+* Consuming APIs
+* Managing subscriptions
+* Booking travel
+* Purchasing compute resources
+
+Without a standardized authorization framework, organizations face significant challenges:
+
+* Excessive spending risk
+* Lack of accountability
+* Fraud
+* Unauthorized purchases
+* Vendor impersonation
+* Difficulty auditing decisions
+
+APP provides a common authorization layer for agent spending.
+
+---
+
+# Core Principles
+
+## Identity Before Spending
+
+An agent MUST possess a valid Agent Passport before exercising spending authority.
+
+Anonymous agents MUST NOT be authorized to spend.
+
+---
+
+## Ownership Before Authority
+
+An agent MUST have a verifiable owner.
+
+All spending authority ultimately traces back to an accountable owner.
+
+---
+
+## Least Privilege
+
+Agents should only receive the minimum spending authority required for their purpose.
+
+---
+
+## Auditability
+
+Every spending decision SHOULD be recorded through Provenance Envelopes.
+
+---
+
+## Revocability
+
+Spending authority MUST be revocable at any time.
+
+---
+
+# Spend Authorization Model
+
+Authorization is granted through Spend Policies.
+
+Example:
+
+```json
+{
+  "policy_id": "spn_xxx",
+  "agent_id": "agt_xxx",
+  "daily_limit": 1000,
+  "monthly_limit": 10000,
+  "currency": "USD",
+  "allowed_vendors": [
+    "openai",
+    "aws",
+    "anthropic"
+  ],
+  "status": "active"
+}
+```
+
+---
+
+# Spend Policy Components
+
+## Daily Limits
+
+Maximum spend permitted within a rolling 24-hour period.
+
+## Monthly Limits
+
+Maximum spend permitted within a calendar month.
+
+## Vendor Restrictions
+
+Allowed vendors.
+
+Examples:
+
+* OpenAI
+* Anthropic
+* AWS
+* Google Cloud
+
+## Category Restrictions
+
+Allowed purchase categories.
+
+Examples:
+
+* Compute
+* Software
+* Travel
+* Marketing
+* Research
+
+## Geographic Restrictions
+
+Permitted jurisdictions.
+
+## Time Restrictions
+
+Permitted operating hours.
+
+---
+
+# Authorization Flow
+
+```text
+Owner
+  ↓
+Spend Policy
+  ↓
+Agent
+  ↓
+Vendor
+  ↓
+Provenance Record
+```
+
+Every authorization decision should be traceable.
+
+---
+
+# Approval Levels
+
+## Autonomous
+
+Agent may proceed automatically.
+
+## Human Approval
+
+Agent must request approval.
+
+## Multi-Party Approval
+
+Multiple approvers required.
+
+## Emergency Authorization
+
+Temporary escalation during exceptional circumstances.
+
+---
+
+# Spend Classes
+
+## Low Risk
+
+Examples:
+
+* API Calls
+* Cloud Usage
+* Data Purchases
+
+## Medium Risk
+
+Examples:
+
+* SaaS Subscriptions
+* Contractor Services
+
+## High Risk
+
+Examples:
+
+* Procurement Contracts
+* Financial Commitments
+* Legal Agreements
+
+Higher-risk transactions may require stronger approval mechanisms.
+
+---
+
+# Spend Provenance
+
+Authorized spending events SHOULD generate provenance records.
+
+Example:
+
+```json
+{
+  "action_type": "purchase.api_usage",
+  "vendor": "openai",
+  "amount": 25.00,
+  "currency": "USD"
+}
+```
+
+This enables complete auditability.
+
+---
+
+# Federation Considerations
+
+Federated organizations may recognize external spending policies.
+
+Cross-domain authorization SHOULD require explicit trust relationships.
+
+---
+
+# Future Extensions
+
+Potential future integrations:
+
+* Banking APIs
+* Open Banking
+* Stablecoins
+* Payment Networks
+* Procurement Systems
+* Corporate Card Platforms
+* Agent Wallets
+
+---
+
+# Security Considerations
+
+Spend authorization is a high-risk capability.
+
+Implementations SHOULD support:
+
+* Multi-factor approvals
+* Rate limiting
+* Revocation
+* Anomaly detection
+* Vendor validation
+* Real-time monitoring
+
+---
+
+# Conclusion
+
+Spend Authorization provides a standardized trust and control framework for financial actions performed by autonomous systems.
