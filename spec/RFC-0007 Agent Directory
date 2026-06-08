@@ -1,0 +1,123 @@
+# RFC-0007 Agent Directory
+
+Status: Accepted
+
+## Abstract
+
+The Agent Directory provides a standardized discovery mechanism for identifying and locating agents participating in the APP ecosystem.
+
+The directory functions as the discovery layer of the agent internet.
+
+## Motivation
+
+As the number of agents grows, consumers require mechanisms to discover:
+
+* Trusted agents
+* Service providers
+* Federation participants
+* Specialized capabilities
+
+The Agent Directory addresses this requirement.
+
+## Directory Entry Structure
+
+```json
+{
+  "agent_id": "agt_xxx",
+  "agent_name": "Research Assistant",
+  "agent_class": "service",
+  "organization": "Example Corp",
+  "reputation": 840,
+  "trust_level": "trusted",
+  "capabilities": [
+    "research",
+    "summarization"
+  ]
+}
+```
+
+## Agent Classes
+
+Supported classes include:
+
+* Personal
+* Enterprise
+* Service
+* Marketplace
+* Government
+
+## Discovery Filters
+
+Consumers may search by:
+
+* Agent ID
+* Organization
+* Reputation
+* Capability
+* Federation Status
+* Trust Level
+* Jurisdiction
+
+## Capability Discovery
+
+Agents may publish supported capabilities.
+
+Examples:
+
+* Research
+* Search
+* Payments
+* Procurement
+* Compliance
+* Scheduling
+* Customer Service
+
+## Public Metadata
+
+Directory entries may expose:
+
+* Agent Name
+* Organization
+* Agent Class
+* Trust Level
+* Reputation Tier
+* Federation Status
+
+Sensitive information should not be published.
+
+## Verification
+
+Directory information should be verifiable through:
+
+* Agent Passport
+* Federation Records
+* Reputation Data
+* Ownership History
+
+## Federation Integration
+
+Directories may aggregate agents across multiple APP nodes.
+
+This enables discovery throughout the federation network.
+
+## Ownership Visibility
+
+Consumers should be able to determine:
+
+* Who owns an agent
+* Whether ownership changed
+* Whether the ownership history is verifiable
+
+## Future Extensions
+
+Potential future extensions include:
+
+* Capability Registries
+* Marketplace Discovery
+* Service Metadata
+* Cost Information
+* Availability Information
+
+## Conclusion
+
+The Agent Directory serves as the discovery layer of APP and enables trusted interaction between autonomous systems at scale.
