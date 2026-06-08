@@ -1,0 +1,355 @@
+# RFC-0010 Agent-to-Agent Trust Exchange
+
+Status: Accepted
+
+## Abstract
+
+Agent-to-Agent Trust Exchange (A2TX) defines the standardized mechanism through which autonomous agents establish trust relationships, exchange identity information, negotiate authority, verify permissions, and validate operational trust prior to interaction.
+
+A2TX serves a role analogous to the TLS handshake on the traditional internet.
+
+Before autonomous agents exchange information, perform transactions, access resources, delegate authority, negotiate contracts, consume services, or transfer value, both parties must establish a common trust context.
+
+This RFC defines that trust establishment process.
+
+---
+
+# Motivation
+
+The traditional internet assumes humans are the primary trust participants.
+
+A user visits a website.
+
+A user authenticates.
+
+A user approves an action.
+
+Autonomous systems fundamentally change this model.
+
+Future interactions increasingly resemble:
+
+```text
+Agent
+  ↓
+Agent
+  ↓
+Agent
+  ↓
+Agent
+```
+
+Examples include:
+
+* Procurement agents purchasing software
+* Research agents consuming external data services
+* Scheduling agents interacting with travel systems
+* Financial agents paying vendors
+* Compliance agents reviewing external documents
+* Marketplace agents negotiating services
+
+In these scenarios there may be no human directly involved in the interaction.
+
+Trust must therefore become machine-verifiable.
+
+---
+
+# Design Goals
+
+Agent-to-Agent Trust Exchange is designed to provide:
+
+* Identity Verification
+* Ownership Verification
+* Capability Discovery
+* Authorization Validation
+* Reputation Evaluation
+* Federation Trust Assessment
+* Auditability
+* Revocation Awareness
+
+without requiring centralized infrastructure.
+
+---
+
+# Trust Exchange Lifecycle
+
+A trust exchange consists of six stages:
+
+```text
+Discovery
+    ↓
+Identity Validation
+    ↓
+Ownership Validation
+    ↓
+Capability Negotiation
+    ↓
+Trust Assessment
+    ↓
+Session Establishment
+```
+
+---
+
+# Discovery
+
+The initiating agent discovers the target agent.
+
+Discovery may occur through:
+
+* Agent Directories
+* Federation Registries
+* Marketplace Listings
+* Referrals
+* Existing Relationships
+
+Discovery does not imply trust.
+
+---
+
+# Identity Validation
+
+Both agents exchange:
+
+* Agent ID
+* Passport ID
+* Federation Node
+* Public Key
+* Passport Status
+
+Example:
+
+```json
+{
+  "agent_id": "agt_research_001",
+  "passport_id": "psp_001",
+  "public_key": "...",
+  "status": "active"
+}
+```
+
+Each agent validates:
+
+* Passport existence
+* Passport status
+* Signature validity
+* Federation origin
+
+---
+
+# Ownership Validation
+
+Agents may request ownership information.
+
+Ownership information includes:
+
+* Owner Organization
+* Jurisdiction
+* Ownership History
+* Transfer Events
+
+Example:
+
+```json
+{
+  "owner": "Example Corporation",
+  "verified_domain": "example.com",
+  "ownership_status": "verified"
+}
+```
+
+Ownership establishes accountability.
+
+---
+
+# Capability Negotiation
+
+Agents may advertise capabilities.
+
+Example:
+
+```json
+{
+  "capabilities": [
+    "web_search",
+    "research",
+    "document_analysis"
+  ]
+}
+```
+
+Capabilities may be:
+
+### Self Declared
+
+Published by the agent.
+
+### Attested
+
+Verified by a third party.
+
+### Authority Verified
+
+Verified by a trusted authority node.
+
+Consumers should distinguish between these levels.
+
+---
+
+# Trust Assessment
+
+Trust assessment combines:
+
+* Passport Status
+* Reputation
+* Attestations
+* Federation Trust Level
+* Ownership Verification
+* Historical Interactions
+
+Example:
+
+```json
+{
+  "reputation": 925,
+  "tier": "Gold",
+  "federation_level": "trusted"
+}
+```
+
+Trust decisions remain local.
+
+APP provides evidence, not mandates.
+
+---
+
+# Session Establishment
+
+Upon successful trust assessment:
+
+```text
+Agent A
+    ↔
+Agent B
+```
+
+establish an interaction session.
+
+Session metadata may include:
+
+* Session ID
+* Negotiated Permissions
+* Duration
+* Spending Limits
+* Delegation Scope
+
+---
+
+# Trust Exchange Records
+
+Trust exchanges SHOULD generate provenance records.
+
+Example:
+
+```json
+{
+  "action_type": "trust_exchange.established",
+  "counterparty": "agt_vendor_001",
+  "session_id": "ses_001"
+}
+```
+
+This enables future auditing.
+
+---
+
+# Delegation Awareness
+
+Trust exchanges should disclose active delegations.
+
+Example:
+
+```json
+{
+  "delegated_by": "agt_parent_001",
+  "permissions": [
+    "payments"
+  ]
+}
+```
+
+Consumers may evaluate delegated authority separately from direct authority.
+
+---
+
+# Spend Authorization Awareness
+
+When financial interactions are expected, agents may disclose:
+
+* Spending Authority
+* Spending Limits
+* Authorized Vendors
+* Approval Requirements
+
+This reduces fraud and unauthorized commitments.
+
+---
+
+# Federation Considerations
+
+Trust exchanges may occur:
+
+* Within a single node
+* Across trusted federation nodes
+* Across authority nodes
+
+Cross-domain exchanges should require federation verification.
+
+---
+
+# Failure Conditions
+
+Trust exchange should fail when:
+
+* Passport revoked
+* Passport expired
+* Reputation below threshold
+* Federation trust insufficient
+* Required capabilities absent
+* Signature verification fails
+
+Failure should be explicit.
+
+---
+
+# Security Considerations
+
+Trust exchange is a high-value target.
+
+Implementations should support:
+
+* Signed exchanges
+* Replay protection
+* Nonces
+* Timestamps
+* Session expiration
+* Federation validation
+
+Trust should never be assumed.
+
+---
+
+# Future Extensions
+
+Potential future additions include:
+
+* Agent negotiation frameworks
+* Agent contract exchange
+* Agent service discovery
+* Agent payment channels
+* Agent insurance frameworks
+
+---
+
+# Conclusion
+
+Agent-to-Agent Trust Exchange provides the foundational trust handshake for autonomous systems and establishes the basis for secure machine-to-machine interaction within the APP ecosystem.
