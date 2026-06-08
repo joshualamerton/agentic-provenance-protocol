@@ -1,0 +1,125 @@
+# RFC-0006 Delegation
+
+Status: Accepted
+
+## Abstract
+
+Delegation allows an owner, organization, or agent to grant authority to another agent for a defined purpose and duration.
+
+All delegated authority must be verifiable and auditable.
+
+## Motivation
+
+Autonomous systems increasingly operate as teams of specialized agents.
+
+Examples:
+
+* Research Agent
+* Finance Agent
+* Purchasing Agent
+* Compliance Agent
+
+Delegation enables these systems to collaborate safely.
+
+## Delegation Structure
+
+```json
+{
+  "delegation_id": "dlg_xxx",
+  "grantor_agent_id": "agt_parent",
+  "delegate_agent_id": "agt_child",
+  "permissions": [
+    "payments",
+    "research"
+  ],
+  "created_at": "...",
+  "expires_at": "...",
+  "status": "active"
+}
+```
+
+## Delegation Lifecycle
+
+States:
+
+### Active
+
+Delegation is valid.
+
+### Suspended
+
+Temporarily disabled.
+
+### Revoked
+
+Permanently invalid.
+
+### Expired
+
+Delegation validity period has ended.
+
+## Delegated Permissions
+
+Examples:
+
+* Payments
+* Search
+* Procurement
+* Communications
+* Contract Review
+* Data Access
+
+Implementations may define additional permissions.
+
+## Delegation Verification
+
+Before exercising delegated authority:
+
+1. Verify the delegate passport.
+2. Verify delegation status.
+3. Verify permission scope.
+4. Verify expiration date.
+
+## Delegation Trees
+
+Delegations may form hierarchical structures.
+
+Example:
+
+```text
+Organization
+    ↓
+Finance Agent
+    ↓
+Payment Agent
+    ↓
+Invoice Agent
+```
+
+Implementations should be capable of evaluating effective authority throughout the chain.
+
+## Delegation Revocation
+
+Revocation immediately invalidates delegated permissions.
+
+All revocation events must be recorded.
+
+## Provenance Requirements
+
+Actions performed under delegated authority should record:
+
+* Original grantor
+* Delegate
+* Permission exercised
+
+This ensures complete accountability.
+
+## Security Considerations
+
+Delegation should follow the principle of least privilege.
+
+Agents should receive only the permissions required to perform their role.
+
+## Conclusion
+
+Delegation enables safe, auditable collaboration between autonomous systems.
