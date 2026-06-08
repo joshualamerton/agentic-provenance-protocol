@@ -1,0 +1,575 @@
+# RFC-0015 Agent Wallets & Economic Identity
+
+Status: Accepted
+
+## Abstract
+
+Agent Wallets & Economic Identity defines a standardized framework for representing, authorizing, governing, auditing, and managing the economic activities of autonomous systems.
+
+The purpose of this RFC is not to create a payment network, cryptocurrency, banking platform, or financial institution.
+
+Instead, APP provides the identity, authorization, trust, ownership, provenance, reputation, and governance infrastructure required for autonomous systems to participate safely in economic activity.
+
+Just as Agent Passports establish identity, Agent Wallets establish economic identity.
+
+Agent Wallets allow autonomous systems to:
+
+* Hold spending authority
+* Manage budgets
+* Interact with vendors
+* Execute purchases
+* Track economic activity
+* Operate under delegated authority
+* Generate auditable financial provenance
+
+while maintaining accountability and trust.
+
+---
+
+# Motivation
+
+Modern software increasingly performs economic actions.
+
+Examples include:
+
+* Purchasing cloud resources
+* Consuming APIs
+* Paying contractors
+* Renewing subscriptions
+* Procuring services
+* Acquiring data
+* Booking travel
+* Managing advertising spend
+
+Historically, these decisions required direct human approval.
+
+Future autonomous systems will increasingly make these decisions independently.
+
+This creates a new challenge:
+
+```text id="wn6ghh"
+Who authorized the spend?
+Who owns the wallet?
+Who approved the transaction?
+Who is accountable?
+Can the action be audited?
+```
+
+Economic activity requires identity.
+
+Identity requires trust.
+
+APP provides that foundation.
+
+---
+
+# Design Goals
+
+Agent Wallets are designed to provide:
+
+* Economic Identity
+* Authorization
+* Accountability
+* Auditability
+* Delegation
+* Vendor Trust
+* Federation Compatibility
+
+without becoming a payment processor.
+
+---
+
+# Core Principle
+
+APP does not move money.
+
+APP governs trust.
+
+Payment execution remains the responsibility of:
+
+* Banks
+* Payment Providers
+* Card Networks
+* Wallet Providers
+* Procurement Platforms
+
+APP provides the trust layer sitting above them.
+
+---
+
+# Economic Identity
+
+Every wallet is associated with:
+
+```text id="k6fk1l"
+Agent Passport
+        +
+Owner
+        +
+Spend Policy
+        +
+Reputation
+```
+
+This forms an agent's economic identity.
+
+---
+
+# Wallet Structure
+
+Example:
+
+```json id="m7h5rq"
+{
+  "wallet_id": "wal_001",
+  "agent_id": "agt_001",
+  "owner_id": "org_001",
+  "status": "active",
+  "currency": "USD"
+}
+```
+
+Wallets are identifiers, not custodians.
+
+---
+
+# Wallet Ownership
+
+Every wallet must have a verifiable owner.
+
+Examples:
+
+* Individual
+* Company
+* Government Agency
+* Federation Participant
+
+Anonymous wallets are discouraged.
+
+---
+
+# Wallet Types
+
+## Personal Wallet
+
+Associated with an individual.
+
+---
+
+## Enterprise Wallet
+
+Associated with an organization.
+
+---
+
+## Service Wallet
+
+Associated with an autonomous service.
+
+---
+
+## Marketplace Wallet
+
+Associated with marketplace activities.
+
+---
+
+## Government Wallet
+
+Associated with public-sector entities.
+
+---
+
+# Wallet Authority Model
+
+Economic authority flows from ownership.
+
+```text id="j5v92q"
+Owner
+    ↓
+Wallet
+    ↓
+Agent
+    ↓
+Transaction
+```
+
+Every action remains attributable.
+
+---
+
+# Spend Policies
+
+Wallets operate under Spend Policies.
+
+Example:
+
+```json id="74lcnz"
+{
+  "daily_limit": 1000,
+  "monthly_limit": 10000,
+  "approved_vendors": [
+    "vnd_openai",
+    "vnd_aws"
+  ]
+}
+```
+
+Spend policies define permissible behavior.
+
+---
+
+# Economic Delegation
+
+Owners may delegate authority.
+
+Example:
+
+```text id="mjlwmg"
+Finance Agent
+        ↓
+Delegates
+        ↓
+Procurement Agent
+```
+
+Delegations may include:
+
+* Budget Limits
+* Vendor Restrictions
+* Time Restrictions
+* Approval Requirements
+
+---
+
+# Wallet Reputation
+
+Wallets accumulate reputation.
+
+Factors include:
+
+* Transaction History
+* Provenance Quality
+* Verified Signatures
+* Vendor Feedback
+* Federation Standing
+
+Reputation enables risk-based decisions.
+
+---
+
+# Wallet Trust Levels
+
+## Restricted
+
+New wallet.
+
+---
+
+## Standard
+
+Verified wallet.
+
+---
+
+## Trusted
+
+Strong operational history.
+
+---
+
+## Authority Trusted
+
+Highly reputable wallet.
+
+---
+
+# Economic Provenance
+
+Every economic action should generate provenance.
+
+Example:
+
+```json id="40zlxt"
+{
+  "action_type": "wallet.purchase",
+  "vendor": "vnd_openai",
+  "amount": 100,
+  "currency": "USD"
+}
+```
+
+This enables complete financial auditability.
+
+---
+
+# Vendor Integration
+
+Wallets interact with:
+
+* Vendor Registry
+* Vendor Reputation
+* Vendor Verification
+
+Agents should not transact with unknown vendors.
+
+---
+
+# Multi-Agent Wallets
+
+Multiple agents may share a wallet.
+
+Example:
+
+```text id="cvzb3d"
+Research Agent
+      ↓
+Finance Agent
+      ↓
+Procurement Agent
+      ↓
+Shared Enterprise Wallet
+```
+
+Governance remains centralized.
+
+Execution may be distributed.
+
+---
+
+# Approval Workflows
+
+Wallets may support:
+
+## Autonomous Approval
+
+Agent proceeds automatically.
+
+---
+
+## Human Approval
+
+Human approval required.
+
+---
+
+## Multi-Signature Approval
+
+Multiple approvals required.
+
+---
+
+## Authority Approval
+
+Authority participation required.
+
+---
+
+# Budget Structures
+
+Wallets may contain:
+
+## Operational Budget
+
+Day-to-day spending.
+
+---
+
+## Strategic Budget
+
+Long-term initiatives.
+
+---
+
+## Emergency Budget
+
+Exceptional circumstances.
+
+---
+
+# Federation Wallets
+
+Federated organizations may recognize:
+
+* External Wallets
+* Cross-Domain Authorizations
+* Cross-Domain Delegations
+
+Trust should be established before acceptance.
+
+---
+
+# Economic Sessions
+
+Transactions may occur within:
+
+```text id="0o8v1t"
+Trust Session
+      ↓
+Authorization Session
+      ↓
+Economic Session
+```
+
+This provides contextual controls.
+
+---
+
+# Agent Wallet Discovery
+
+Wallet capabilities may be discoverable through:
+
+* Directories
+* Marketplaces
+* Federation Networks
+
+Sensitive information should remain protected.
+
+---
+
+# Wallet Privacy
+
+Wallets should expose only necessary information.
+
+Example:
+
+```text id="7twlqf"
+Reputation
+✓
+
+Verification Status
+✓
+
+Available Balance
+✗
+
+Internal Financial Data
+✗
+```
+
+Privacy remains important.
+
+---
+
+# Wallet Revocation
+
+Wallets may be:
+
+* Suspended
+* Revoked
+* Frozen
+* Archived
+
+Revocation should propagate through federation systems.
+
+---
+
+# Economic Risk Assessment
+
+Future implementations may calculate:
+
+* Spend Risk
+* Vendor Risk
+* Fraud Risk
+* Reputation Risk
+
+Risk signals assist autonomous decision-making.
+
+---
+
+# Agent Commerce
+
+Agent Wallets enable:
+
+```text id="o7s7tf"
+Agent
+      ↓
+Discovery
+      ↓
+Trust
+      ↓
+Authorization
+      ↓
+Purchase
+      ↓
+Provenance
+```
+
+forming the basis of autonomous commerce.
+
+---
+
+# Interoperability
+
+Agent Wallets are designed to integrate with:
+
+* Open Banking
+* Corporate Cards
+* Procurement Systems
+* ERP Platforms
+* Vendor Networks
+* Payment Providers
+
+APP remains payment-neutral.
+
+---
+
+# Security Considerations
+
+Economic identity is a high-value target.
+
+Implementations should support:
+
+* Strong Authentication
+* Delegation Controls
+* Approval Workflows
+* Revocation
+* Continuous Monitoring
+* Provenance Recording
+
+Trust should be continuously evaluated.
+
+---
+
+# Relationship To Other RFCs
+
+Agent Wallets build upon:
+
+* RFC-0001 Agent Passports
+* RFC-0005 Reputation
+* RFC-0006 Delegation
+* RFC-0008 Spend Authorization
+* RFC-0010 Trust Exchange
+* RFC-0012 Vendor Registry
+* RFC-0013 Revocation & Trust Distribution
+* RFC-0014 Authority Nodes
+
+This RFC acts as the economic convergence point of the APP ecosystem.
+
+---
+
+# Long-Term Vision
+
+The future internet will contain billions of autonomous systems participating in economic activity.
+
+Those systems will:
+
+* Purchase services
+* Negotiate contracts
+* Allocate budgets
+* Manage resources
+* Coordinate organizations
+
+Economic activity requires identity.
+
+Identity requires trust.
+
+Trust requires infrastructure.
+
+Agent Wallets provide the economic identity layer of the agent internet.
+
+---
+
+# Conclusion
+
+Agent Wallets & Economic Identity establish a standardized framework for representing and governing economic activity performed by autonomous systems and provide the foundation for trusted autonomous commerce across the APP ecosystem.
