@@ -1,0 +1,482 @@
+# RFC-0012 Vendor Registry
+
+Status: Accepted
+
+## Abstract
+
+The Vendor Registry defines a standardized framework for identifying, verifying, discovering, evaluating, and trusting organizations that provide products, services, infrastructure, data, APIs, compute resources, and commercial capabilities to autonomous systems.
+
+The Vendor Registry serves as the trust layer for agent commerce.
+
+Just as Agent Passports establish trust for autonomous agents, Vendor Registry records establish trust for commercial entities interacting with those agents.
+
+The Vendor Registry reduces fraud, impersonation, procurement risk, and unauthorized transactions while enabling trusted autonomous commerce at scale.
+
+---
+
+# Motivation
+
+As autonomous systems become capable of making purchasing decisions, selecting vendors, negotiating services, and consuming APIs, they require mechanisms for determining:
+
+* Who is the vendor?
+* Is the vendor legitimate?
+* Is the vendor verified?
+* Is the vendor trusted?
+* Has the vendor been compromised?
+* Is the vendor authorized to provide a service?
+* Has the vendor been approved by the organization?
+
+Human buyers perform these evaluations naturally.
+
+Autonomous systems require structured trust infrastructure.
+
+Without a Vendor Registry, agents are vulnerable to:
+
+* Domain spoofing
+* Vendor impersonation
+* Phishing
+* Fake APIs
+* Fraudulent marketplaces
+* Counterfeit services
+* Supply chain attacks
+
+The Vendor Registry addresses these risks.
+
+---
+
+# Design Goals
+
+The Vendor Registry is designed to provide:
+
+* Vendor Identity
+* Vendor Verification
+* Vendor Discovery
+* Vendor Reputation
+* Vendor Federation
+* Vendor Authorization
+* Vendor Revocation
+
+without requiring centralized control.
+
+---
+
+# Vendor Identity
+
+Each vendor receives a unique Vendor Identifier.
+
+Example:
+
+```json
+{
+  "vendor_id": "vnd_openai",
+  "vendor_name": "OpenAI",
+  "domain": "openai.com",
+  "status": "verified"
+}
+```
+
+Vendor identities should remain stable over time.
+
+---
+
+# Vendor Record Structure
+
+Example:
+
+```json
+{
+  "vendor_id": "vnd_openai",
+  "vendor_name": "OpenAI",
+  "primary_domain": "openai.com",
+  "vendor_type": "api_provider",
+  "trust_level": "verified",
+  "reputation_score": 980,
+  "federation_status": "trusted",
+  "status": "active"
+}
+```
+
+---
+
+# Vendor Types
+
+APP supports multiple vendor classes.
+
+## API Provider
+
+Examples:
+
+* OpenAI
+* Anthropic
+* Cohere
+
+---
+
+## Infrastructure Provider
+
+Examples:
+
+* AWS
+* Azure
+* Google Cloud
+
+---
+
+## Marketplace
+
+Examples:
+
+* Shopify
+* Amazon Marketplace
+* App Stores
+
+---
+
+## Data Provider
+
+Examples:
+
+* Financial Data
+* Property Data
+* Research Data
+
+---
+
+## Service Provider
+
+Examples:
+
+* Legal Services
+* Accounting Services
+* Consulting Services
+
+---
+
+## Payment Provider
+
+Examples:
+
+* Stripe
+* Visa
+* Mastercard
+
+---
+
+# Vendor Verification
+
+Vendor verification establishes legitimacy.
+
+Verification may include:
+
+* Domain ownership verification
+* DNS validation
+* Federation validation
+* Legal entity verification
+* Authority attestations
+
+Verification increases trust but does not guarantee quality.
+
+---
+
+# Verification Levels
+
+## Unverified
+
+Vendor has been registered but not validated.
+
+---
+
+## Domain Verified
+
+Vendor controls the registered domain.
+
+---
+
+## Federated Verified
+
+Vendor participates in federation trust frameworks.
+
+---
+
+## Authority Verified
+
+Vendor has been validated by authority participants.
+
+Highest trust level.
+
+---
+
+# Domain Ownership Validation
+
+A vendor may verify ownership through:
+
+```text
+DNS TXT Record
+```
+
+or
+
+```text
+/.well-known/app
+```
+
+Example:
+
+```text
+app-verification=abc123xyz
+```
+
+Ownership verification is foundational to vendor trust.
+
+---
+
+# Vendor Reputation
+
+Vendors accumulate reputation over time.
+
+Signals include:
+
+* Successful Transactions
+* Federation Participation
+* Authority Attestations
+* Vendor Longevity
+* Consumer Feedback
+* Security History
+
+---
+
+# Vendor Reputation Structure
+
+```json
+{
+  "vendor_id": "vnd_openai",
+  "score": 980,
+  "tier": "Platinum",
+  "years_active": 10,
+  "security_incidents": 0
+}
+```
+
+---
+
+# Vendor Trust Tiers
+
+## Bronze
+
+New vendor.
+
+---
+
+## Silver
+
+Verified vendor with positive history.
+
+---
+
+## Gold
+
+Established vendor with strong operational history.
+
+---
+
+## Platinum
+
+Exceptional vendor with extensive trust signals.
+
+---
+
+# Vendor Federation
+
+Vendor information may be shared across APP federation networks.
+
+Federation allows:
+
+* Cross-domain vendor verification
+* Shared reputation signals
+* Shared security alerts
+* Shared revocation events
+
+No central registry is required.
+
+---
+
+# Vendor Endorsements
+
+Organizations may issue endorsements.
+
+Examples:
+
+```text
+Enterprise Approved
+Verified Partner
+Certified Vendor
+Trusted Supplier
+Preferred Provider
+```
+
+Endorsements are represented through Attestations.
+
+---
+
+# Vendor Revocation
+
+Vendor records may be revoked.
+
+Reasons include:
+
+* Domain compromise
+* Fraud
+* Security incidents
+* Legal violations
+* Federation violations
+
+Revocations should be visible to all federation participants.
+
+---
+
+# Vendor Categories
+
+Vendors may advertise categories.
+
+Example:
+
+```json
+{
+  "categories": [
+    "ai",
+    "cloud",
+    "payments"
+  ]
+}
+```
+
+Categories assist procurement agents in discovery.
+
+---
+
+# Procurement Integration
+
+The Vendor Registry is designed to integrate with:
+
+* Spend Authorization
+* Procurement Systems
+* Marketplace Discovery
+* Agent Wallets
+* Vendor Approval Workflows
+
+Procurement agents should reference the Vendor Registry before initiating transactions.
+
+---
+
+# Vendor Approval Policies
+
+Organizations may define approved vendor lists.
+
+Example:
+
+```json
+{
+  "organization": "Example Corp",
+  "approved_vendors": [
+    "vnd_openai",
+    "vnd_aws",
+    "vnd_anthropic"
+  ]
+}
+```
+
+Agents should honor these restrictions.
+
+---
+
+# Vendor Risk Scoring
+
+Future implementations may include:
+
+* Cyber Risk Scores
+* Compliance Scores
+* Financial Stability Scores
+* Federation Trust Scores
+
+Risk scoring helps agents make informed decisions.
+
+---
+
+# Marketplace Integration
+
+Vendor Registry records may be surfaced through:
+
+* Agent Marketplaces
+* Procurement Platforms
+* Federation Directories
+* Public Discovery Services
+
+This enables a global trusted vendor ecosystem.
+
+---
+
+# Security Considerations
+
+Vendor impersonation represents one of the largest threats to autonomous commerce.
+
+Implementations should verify:
+
+* Domains
+* Federation Identity
+* Attestations
+* Ownership
+
+before authorizing transactions.
+
+Trust should never be based solely on names or branding.
+
+---
+
+# Future Extensions
+
+Potential future extensions include:
+
+* Vendor Insurance
+* Service-Level Agreements
+* Vendor Certifications
+* Vendor Compliance Frameworks
+* Autonomous Procurement Networks
+* Vendor Risk Intelligence
+
+---
+
+# Relationship to Other RFCs
+
+The Vendor Registry builds upon:
+
+* RFC-0001 Agent Passports
+* RFC-0003 Federation
+* RFC-0004 Attestations
+* RFC-0005 Reputation
+* RFC-0008 Spend Authorization
+* RFC-0009 Agent Marketplace Discovery
+
+Together these RFCs establish the trust infrastructure required for autonomous commerce.
+
+---
+
+# Long-Term Vision
+
+In the future, autonomous systems will:
+
+* Discover vendors
+* Verify vendors
+* Evaluate vendor trust
+* Negotiate services
+* Execute purchases
+* Audit outcomes
+
+without direct human involvement.
+
+The Vendor Registry provides the trust foundation that makes this possible.
+
+---
+
+# Conclusion
+
+The Vendor Registry establishes a standardized trust framework for commercial entities interacting with autonomous systems and forms a critical component of the emerging agent economy.
