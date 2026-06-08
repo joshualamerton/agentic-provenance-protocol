@@ -1,0 +1,470 @@
+# RFC-0013 Agent Revocation & Trust Distribution
+
+Status: Accepted
+
+## Abstract
+
+Agent Revocation & Trust Distribution defines the mechanisms by which agent passports, federation nodes, authority nodes, vendor records, attestations, delegations, and trust relationships may be invalidated, distributed, and consumed across the APP ecosystem.
+
+This RFC serves a role analogous to:
+
+* Certificate Revocation Lists (CRLs)
+* Online Certificate Status Protocol (OCSP)
+* Public Key Infrastructure Revocation Systems
+* Trust Distribution Networks
+
+for autonomous systems.
+
+Trust is not permanent.
+
+An agent that was trusted yesterday may become compromised today.
+
+APP therefore requires mechanisms to rapidly distribute trust changes across the network.
+
+---
+
+# Motivation
+
+Identity systems without revocation become dangerous.
+
+Consider the following scenarios:
+
+* An agent private key is stolen.
+* An employee leaves an organization.
+* A federation node is compromised.
+* A vendor becomes fraudulent.
+* An authority node is found to be malicious.
+* An attestation is discovered to be false.
+* A delegation is abused.
+
+Without revocation infrastructure:
+
+```text
+Compromise
+    ↓
+Trust Persists
+    ↓
+Damage Increases
+```
+
+APP must ensure trust can be removed as efficiently as it can be granted.
+
+---
+
+# Design Goals
+
+The revocation framework is designed to provide:
+
+* Immediate Revocation
+* Distributed Trust Updates
+* Federation Awareness
+* Auditable Revocation History
+* Tamper Resistance
+* Public Verifiability
+
+without requiring centralized ownership.
+
+---
+
+# Revocable Objects
+
+APP supports revocation of:
+
+## Agent Passports
+
+Identity credentials.
+
+---
+
+## Vendor Records
+
+Commercial trust records.
+
+---
+
+## Federation Nodes
+
+Cross-domain trust participants.
+
+---
+
+## Authority Nodes
+
+High-trust federation operators.
+
+---
+
+## Attestations
+
+Trust endorsements.
+
+---
+
+## Delegations
+
+Granted permissions.
+
+---
+
+## Spend Authorizations
+
+Financial permissions.
+
+---
+
+# Revocation Lifecycle
+
+```text
+Trusted
+    ↓
+Compromised
+    ↓
+Revoked
+    ↓
+Distributed
+    ↓
+Consumed
+```
+
+---
+
+# Revocation States
+
+## Active
+
+Object is trusted.
+
+---
+
+## Suspended
+
+Temporary trust removal.
+
+May be reinstated.
+
+---
+
+## Revoked
+
+Trust permanently removed.
+
+---
+
+## Expired
+
+Trust naturally ended.
+
+---
+
+# Revocation Reasons
+
+Examples include:
+
+```text
+COMPROMISED
+OWNER_REQUEST
+KEY_ROTATION
+SECURITY_INCIDENT
+POLICY_VIOLATION
+FRAUD
+DOMAIN_LOSS
+AUTHORITY_REMOVAL
+```
+
+---
+
+# Revocation Record
+
+Example:
+
+```json
+{
+  "object_id": "agt_123",
+  "object_type": "agent",
+  "reason": "COMPROMISED",
+  "revoked_at": "2027-01-15T10:00:00Z",
+  "issuer": "authority_node_01"
+}
+```
+
+Revocation records should be immutable.
+
+---
+
+# Revocation Feed
+
+Every APP node SHOULD expose:
+
+```text
+/.well-known/app/revocations
+```
+
+Example:
+
+```json
+{
+  "protocol": "APP",
+  "version": "1.0",
+  "generated_at": "2027-01-15T10:00:00Z",
+  "revocations": [...]
+}
+```
+
+This endpoint serves as the primary trust distribution mechanism.
+
+---
+
+# Delta Distribution
+
+Nodes may request:
+
+```text
+Last 24 Hours
+Last 7 Days
+Last 30 Days
+```
+
+rather than downloading the full revocation history.
+
+Example:
+
+```text
+/revocations?days=7
+```
+
+This improves scalability.
+
+---
+
+# Federation Distribution
+
+Federated nodes SHOULD exchange revocation information.
+
+Example:
+
+```text
+Authority Node
+      ↓
+Trusted Nodes
+      ↓
+Verified Nodes
+      ↓
+Observe Nodes
+```
+
+Trust changes should propagate rapidly.
+
+---
+
+# Real-Time Verification
+
+Nodes may support:
+
+```text
+verify_agent
+verify_vendor
+verify_node
+```
+
+for live trust validation.
+
+This functions similarly to OCSP.
+
+---
+
+# Revocation Signatures
+
+Revocation feeds SHOULD be signed.
+
+Example:
+
+```json
+{
+  "signature": "ed25519:..."
+}
+```
+
+Consumers should validate signatures before accepting trust updates.
+
+---
+
+# Authority Revocation
+
+Authority status may be revoked.
+
+Examples:
+
+* Governance violations
+* Security failures
+* Federation abuse
+* Compromise
+
+Authority revocation should trigger ecosystem-wide trust updates.
+
+---
+
+# Vendor Revocation
+
+Vendor revocation may occur due to:
+
+* Fraud
+* Domain compromise
+* Security incidents
+* Regulatory actions
+
+Procurement agents should reject revoked vendors.
+
+---
+
+# Attestation Revocation
+
+Attestations may be revoked.
+
+Example:
+
+```text
+Company A attests Agent B
+        ↓
+Evidence changes
+        ↓
+Attestation revoked
+```
+
+Trust should reflect current evidence.
+
+---
+
+# Delegation Revocation
+
+Delegations should be revocable instantly.
+
+Example:
+
+```text
+Employee Leaves Company
+        ↓
+Delegation Revoked
+        ↓
+Agent Loses Authority
+```
+
+---
+
+# Trust Freshness
+
+Consumers SHOULD define maximum trust ages.
+
+Example:
+
+```text
+Trust older than 24 hours
+        ↓
+Must be refreshed
+```
+
+This prevents stale trust decisions.
+
+---
+
+# Revocation Propagation Targets
+
+Trust updates should reach:
+
+* Federation Nodes
+* Directories
+* Marketplaces
+* Explorer Services
+* Procurement Systems
+* Authorization Systems
+
+---
+
+# Historical Auditability
+
+Revocations should never be deleted.
+
+Historical records support:
+
+* Audits
+* Investigations
+* Compliance
+* Forensics
+
+---
+
+# Revocation Transparency
+
+Future APP implementations may maintain:
+
+```text
+Public Revocation Logs
+```
+
+similar to Certificate Transparency.
+
+This enables public oversight.
+
+---
+
+# Security Considerations
+
+Revocation infrastructure is security-critical.
+
+Threats include:
+
+* Fake revocations
+* Suppressed revocations
+* Replay attacks
+* Distribution delays
+* Federation poisoning
+
+Mitigations include:
+
+* Signatures
+* Nonces
+* Timestamps
+* Expiry Windows
+* Federation Validation
+
+---
+
+# Future Extensions
+
+Potential additions include:
+
+* Revocation Transparency Logs
+* Real-Time Revocation Streams
+* Federation Trust Graphs
+* Automated Incident Distribution
+* Threat Intelligence Feeds
+
+---
+
+# Relationship to Other RFCs
+
+This RFC directly supports:
+
+* RFC-0001 Agent Passports
+* RFC-0003 Federation
+* RFC-0004 Attestations
+* RFC-0006 Delegation
+* RFC-0008 Spend Authorization
+* RFC-0012 Vendor Registry
+
+---
+
+# Long-Term Vision
+
+In a future containing billions of autonomous systems, trust changes must propagate globally in near real time.
+
+An agent that becomes compromised in one organization should become untrusted across the ecosystem within minutes rather than weeks.
+
+Revocation is therefore not a supporting feature.
+
+It is a foundational requirement of the agent internet.
+
+---
+
+# Conclusion
+
+Agent Revocation & Trust Distribution provides the mechanisms required to remove trust safely, transparently, and efficiently across the APP ecosystem and serves as a critical component of secure autonomous infrastructure.
