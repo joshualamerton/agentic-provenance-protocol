@@ -1,0 +1,363 @@
+# RFC-0011 Agent Capabilities
+
+Status: Accepted
+
+## Abstract
+
+Agent Capabilities define a standardized framework for describing, discovering, validating, advertising, authorizing, and governing the functional abilities of autonomous systems.
+
+Capabilities represent what an agent can do.
+
+The Agent Capability Framework provides a common language for agents, organizations, marketplaces, and federation networks to reason about agent functionality.
+
+Without standardized capabilities, interoperability between autonomous systems becomes difficult, trust becomes ambiguous, and authorization becomes inconsistent.
+
+This RFC establishes capabilities as a first-class primitive of the Agentic Provenance Protocol.
+
+---
+
+# Motivation
+
+Identity alone does not establish usefulness.
+
+A valid passport answers:
+
+```text
+Who is this agent?
+```
+
+Capabilities answer:
+
+```text
+What can this agent actually do?
+```
+
+As autonomous systems become increasingly specialized, capability discovery becomes critical.
+
+Examples include:
+
+* Web Search
+* Research
+* Scheduling
+* Payments
+* Procurement
+* Compliance Review
+* Contract Analysis
+* Customer Support
+* Data Processing
+
+Organizations need a standardized mechanism to determine whether an agent possesses the functionality required for a given task.
+
+---
+
+# Design Goals
+
+The Capability Framework is designed to provide:
+
+* Capability Discovery
+* Capability Verification
+* Capability Authorization
+* Capability Federation
+* Capability Versioning
+* Capability Governance
+
+without requiring centralized ownership.
+
+---
+
+# Capability Structure
+
+Each capability consists of:
+
+```json
+{
+  "capability_id": "cap_web_search",
+  "name": "Web Search",
+  "version": "1.0",
+  "category": "research",
+  "status": "active"
+}
+```
+
+---
+
+# Capability Categories
+
+APP defines several top-level categories.
+
+## Research
+
+Capabilities focused on information gathering.
+
+Examples:
+
+* Web Search
+* Academic Search
+* Knowledge Retrieval
+* Document Discovery
+
+---
+
+## Analysis
+
+Capabilities focused on reasoning.
+
+Examples:
+
+* Document Analysis
+* Financial Analysis
+* Legal Analysis
+* Data Analysis
+
+---
+
+## Communication
+
+Capabilities focused on interaction.
+
+Examples:
+
+* Email
+* Messaging
+* Voice
+* Translation
+
+---
+
+## Commerce
+
+Capabilities focused on transactions.
+
+Examples:
+
+* Purchasing
+* Procurement
+* Billing
+* Vendor Management
+
+---
+
+## Operations
+
+Capabilities focused on execution.
+
+Examples:
+
+* Scheduling
+* Workflow Automation
+* Monitoring
+* Incident Response
+
+---
+
+## Finance
+
+Capabilities involving financial systems.
+
+Examples:
+
+* Budgeting
+* Payments
+* Reconciliation
+* Accounting
+
+---
+
+# Capability Levels
+
+Capabilities may be declared at different trust levels.
+
+## Self Declared
+
+Published by the agent owner.
+
+No external verification.
+
+---
+
+## Attested
+
+Verified by a third party.
+
+Provides additional confidence.
+
+---
+
+## Authority Verified
+
+Verified by a trusted authority node.
+
+Highest confidence level.
+
+---
+
+# Capability Metadata
+
+Capabilities may expose additional metadata.
+
+Example:
+
+```json
+{
+  "capability_id": "cap_payments",
+  "version": "1.0",
+  "risk_level": "high",
+  "requires_approval": true,
+  "attestation_level": "authority"
+}
+```
+
+---
+
+# Capability Versioning
+
+Capabilities evolve over time.
+
+Each capability should include:
+
+* Major Version
+* Minor Version
+* Status
+
+Example:
+
+```json
+{
+  "capability": "web_search",
+  "version": "2.3"
+}
+```
+
+Versioning enables interoperability across implementations.
+
+---
+
+# Capability Discovery
+
+Capabilities may be discovered through:
+
+* Agent Directories
+* Marketplace Listings
+* Federation Queries
+* Trust Exchanges
+
+Consumers should be able to evaluate capabilities before engaging an agent.
+
+---
+
+# Capability Authorization
+
+Possessing a capability does not imply authorization.
+
+Example:
+
+```text
+Payment Capability
+≠
+Permission To Spend Money
+```
+
+Authorization remains governed through:
+
+* Delegation
+* Spend Policies
+* Ownership Controls
+* Organizational Rules
+
+---
+
+# Capability Composition
+
+Complex agents may combine multiple capabilities.
+
+Example:
+
+```text
+Research Agent
+
+Web Search
++
+Document Analysis
++
+Summarization
++
+Report Generation
+```
+
+Capabilities may therefore form capability graphs.
+
+---
+
+# Federation Considerations
+
+Federated nodes may advertise capabilities.
+
+Cross-domain capability verification should rely on:
+
+* Attestations
+* Reputation
+* Federation Trust
+
+rather than self-declaration alone.
+
+---
+
+# Capability Registries
+
+Future APP implementations may maintain capability registries.
+
+Examples:
+
+```text
+cap_web_search
+cap_document_analysis
+cap_payments
+cap_procurement
+```
+
+This enables standardization across vendors.
+
+---
+
+# MCP and A2A Alignment
+
+The Capability Framework is designed to align with emerging standards including:
+
+* Model Context Protocol (MCP)
+* Agent-to-Agent (A2A)
+* Enterprise Tool Registries
+* Marketplace Discovery Systems
+
+This allows APP to act as a trust and identity layer rather than a competing execution framework.
+
+---
+
+# Security Considerations
+
+Capabilities may be abused if improperly advertised.
+
+Consumers should distinguish between:
+
+* Claimed Capabilities
+* Verified Capabilities
+* Authority Verified Capabilities
+
+Trust should be based on evidence.
+
+---
+
+# Future Extensions
+
+Future capability systems may include:
+
+* Capability Scoring
+* Capability Benchmarking
+* Capability Insurance
+* Capability Licensing
+* Capability Certification
+
+---
+
+# Conclusion
+
+Capabilities provide the functional language of the agent ecosystem and enable trusted interoperability between autonomous systems operating within the APP network.
