@@ -1,0 +1,116 @@
+# RFC-0005 Reputation
+
+Status: Accepted
+
+## Abstract
+
+The APP Reputation Framework provides a standardized mechanism for evaluating trustworthiness based on verifiable identity, provenance history, attestations, federation participation, and operational behavior.
+
+Reputation is intended to assist consumers, organizations, and autonomous systems when evaluating trust.
+
+## Motivation
+
+Identity alone does not establish trust.
+
+An agent may possess a valid passport while still being:
+
+* Newly created
+* Unproven
+* Misconfigured
+* Malicious
+
+Reputation provides additional context.
+
+## Reputation Factors
+
+APP reputation may be derived from:
+
+### Provenance History
+
+The volume and quality of verified provenance events.
+
+### Verified Signatures
+
+Cryptographically signed actions contribute positively to reputation.
+
+### Passport Age
+
+Long-lived agents may receive additional trust weighting.
+
+### Attestations
+
+Trustworthy endorsements increase reputation.
+
+### Federation Participation
+
+Participation in trusted federation networks may contribute to reputation.
+
+### Delegation Performance
+
+Successful delegated actions may influence reputation.
+
+## Reputation Structure
+
+```json
+{
+  "agent_id": "agt_xxx",
+  "score": 820,
+  "tier": "Gold",
+  "transaction_count": 1250,
+  "success_rate": 0.992
+}
+```
+
+## Reputation Tiers
+
+### Bronze
+
+New or minimally verified agents.
+
+### Silver
+
+Established agents with positive operational history.
+
+### Gold
+
+Highly trusted agents with significant verified activity.
+
+### Platinum
+
+Exceptional trust profile supported by extensive provenance and attestation history.
+
+## Authority Weighting
+
+Attestations from Authority Nodes carry greater weighting than standard attestations.
+
+Authority attestations must:
+
+* Be active
+* Be signed
+* Originate from a trusted federation participant
+
+## Negative Reputation Signals
+
+The following may reduce reputation:
+
+* Revoked attestations
+* Security incidents
+* Policy violations
+* Negative authority attestations
+* Excessive failed actions
+
+## Reputation Decay
+
+Reputation may decay over time when agents become inactive.
+
+This encourages ongoing participation and prevents abandoned agents from retaining disproportionate trust.
+
+## Transparency
+
+Consumers should be able to inspect the factors contributing to reputation.
+
+APP encourages explainable trust scoring.
+
+## Conclusion
+
+Reputation provides an adaptive trust layer built on top of identity, provenance, and federation.
