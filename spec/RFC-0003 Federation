@@ -1,0 +1,116 @@
+# RFC-0003 Federation
+
+Status: Accepted
+
+## Abstract
+
+Federation enables independent APP nodes to establish trust, exchange verification information, and participate in a shared trust network.
+
+No central authority is required.
+
+## Motivation
+
+The future agent ecosystem will consist of many organizations operating independent infrastructure.
+
+APP federation allows these organizations to:
+
+* Verify agents
+* Verify provenance
+* Exchange trust signals
+* Validate attestations
+* Discover trusted participants
+
+## Federation Nodes
+
+Each federation participant operates an APP Node.
+
+Nodes may belong to:
+
+* Enterprises
+* Governments
+* Service providers
+* Research organizations
+* Independent operators
+
+## Federation Discovery
+
+Nodes expose:
+
+```text
+/.well-known/app
+```
+
+Response:
+
+```json
+{
+  "protocol": "APP",
+  "version": "1.0",
+  "domain": "example.com",
+  "public_key": "...",
+  "trust_level": "trusted"
+}
+```
+
+## Federation Trust Levels
+
+### Observe
+
+No trust relationship established.
+
+### Verified
+
+Domain ownership verified.
+
+### Trusted
+
+Node cryptographically verified.
+
+### Authority
+
+Node recognized as a high-trust federation participant.
+
+## Cross-Domain Verification
+
+Supported operations:
+
+* cross_verify_agent
+* cross_verify_chain
+
+Responses MUST be signed.
+
+## Federation Key Rotation
+
+Nodes may rotate federation keys.
+
+Previous keys MUST remain available during transition periods.
+
+## Revocation Propagation
+
+Federation nodes SHOULD publish revocation feeds.
+
+Revocation information MUST be propagated promptly.
+
+## Replay Protection
+
+Federation responses include:
+
+* nonce
+* timestamp
+* expires_at
+
+to prevent replay attacks.
+
+## Security Considerations
+
+Federation trust depends on:
+
+* Domain ownership
+* Cryptographic signatures
+* Federation key management
+
+Trust should never rely solely on network connectivity.
+
+## Conclusion
+
+Federation transforms APP from a local identity system into a distributed trust network.
