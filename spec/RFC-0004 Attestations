@@ -1,0 +1,111 @@
+# RFC-0004 Attestations
+
+Status: Accepted
+
+## Abstract
+
+Attestations allow organizations and agents to make verifiable claims regarding the trustworthiness, ownership, capabilities, or status of another agent.
+
+## Motivation
+
+Identity alone is insufficient.
+
+Trust often depends on endorsements from recognized parties.
+
+Attestations provide a standardized mechanism for expressing trust.
+
+## Attestation Structure
+
+```json
+{
+  "attestation_id": "att_xxx",
+  "subject_agent_id": "agt_xxx",
+  "issuer_agent_id": "agt_issuer",
+  "attestation_type": "authority",
+  "claim": "Verified Research Agent",
+  "timestamp": "...",
+  "signature": "..."
+}
+```
+
+## Attestation Types
+
+### Self
+
+Agent makes a claim about itself.
+
+Informational only.
+
+### Third Party
+
+Issued by another APP participant.
+
+Limited trust.
+
+### Verified Organization
+
+Issued by a verified domain owner.
+
+Higher trust.
+
+### Authority
+
+Issued by a recognized authority node.
+
+Highest trust level.
+
+## Attestation Lifecycle
+
+States:
+
+* Active
+* Expired
+* Revoked
+
+Revoked attestations MUST NOT contribute to reputation.
+
+## Verification
+
+Verification requires:
+
+* Valid issuer passport
+* Valid signature
+* Active attestation
+* Trust evaluation
+
+## Authority Attestations
+
+Authority attestations may contribute to reputation calculations.
+
+Authority status is determined through federation governance.
+
+## Negative Attestations
+
+APP supports negative attestations.
+
+Examples:
+
+* Fraudulent Activity
+* Policy Violations
+* Security Breaches
+
+Negative attestations may reduce reputation.
+
+## Transparency
+
+Attestations SHOULD be publicly discoverable.
+
+Consumers must be able to evaluate:
+
+* Issuer
+* Trust level
+* Signature status
+* Claim type
+
+## Security Considerations
+
+Consumers should evaluate the credibility of the issuer, not only the existence of an attestation.
+
+## Conclusion
+
+Attestations provide the social trust layer of APP and enable reputation systems to emerge from verified relationships.
