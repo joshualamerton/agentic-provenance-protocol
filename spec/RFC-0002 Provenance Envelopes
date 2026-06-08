@@ -1,0 +1,92 @@
+# RFC-0002 Provenance Envelopes
+
+Status: Accepted
+
+## Abstract
+
+A Provenance Envelope is the fundamental audit record of the Agentic Provenance Protocol.
+
+Every significant action performed by an agent may be recorded as a cryptographically verifiable provenance event, creating an immutable chain of accountability.
+
+## Motivation
+
+Autonomous systems increasingly make decisions, perform transactions, interact with external systems, and act on behalf of individuals and organizations.
+
+A standardized provenance mechanism is required to answer:
+
+* What happened?
+* Which agent performed the action?
+* When did it occur?
+* Was the event modified?
+* Can the event be independently verified?
+
+## Envelope Structure
+
+```json
+{
+  "envelope_id": "env_xxx",
+  "agent_id": "agt_xxx",
+  "action_type": "tool.web_search",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "metadata": {},
+  "signature": "",
+  "envelope_hash": "",
+  "previous_hash": "",
+  "chain_hash": ""
+}
+```
+
+## Hash Chaining
+
+Each envelope references the previous envelope for the same agent.
+
+This creates a verifiable chain similar to an append-only ledger.
+
+Any modification invalidates the chain.
+
+## Signatures
+
+Agents may cryptographically sign envelopes using their private key.
+
+Signatures are verified against the public key stored in the Agent Passport.
+
+Supported signature schemes:
+
+* Ed25519
+* Future approved algorithms
+
+## Envelope Verification
+
+Verification includes:
+
+* Passport validation
+* Signature validation
+* Hash validation
+* Chain validation
+* Timestamp validation
+
+## Chain Verification
+
+Nodes MUST support full chain verification.
+
+A valid chain confirms:
+
+* No records were removed
+* No records were modified
+* No records were reordered
+
+## Public Verification
+
+Third parties may verify provenance without requiring ownership of the originating agent.
+
+## Security Considerations
+
+Unsigned envelopes provide auditability but not cryptographic attribution.
+
+Signed envelopes provide both.
+
+Systems handling sensitive actions SHOULD require signed provenance.
+
+## Conclusion
+
+Provenance Envelopes provide the immutable audit foundation of APP.
